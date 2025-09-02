@@ -37,7 +37,7 @@ def check_hifen(og_line):
             return ''.join(idk_list)
     return og_line
 
-def write_line(copy_file_path, og_line):
+def write_line(copy_file_path, og_line, line_number):
 
     f = open(copy_file_path, "a", encoding = file_enconding)
     new_line = check_hifen(og_line)
@@ -45,7 +45,7 @@ def write_line(copy_file_path, og_line):
     f.close()
 
     if not new_line == og_line:
-        change_log(change_log_file_path,copy_file_path,1,og_line,new_line)
+        change_log(change_log_file_path,copy_file_path,line_number,og_line,new_line)
 
 def create_one_file(copy_file_path):
     try:
@@ -61,13 +61,15 @@ def create_one_file(copy_file_path):
 
 def read_one_file(og_folder_path, file_name):
     og_file_path = og_folder_path + "\\" + file_name
+    line_number = 0
     debug_log(debug_log_file_path,f'Opening file {og_file_path}...' )
     try:
         f = open(og_file_path, 'r', encoding = file_enconding)
         copy_file_path = f'{copy_folder_path}\\{file_name}'
         create_one_file(copy_file_path)
         for linha in f:
-            write_line(copy_file_path, linha)
+            line_number += 1
+            write_line(copy_file_path, linha,line_number)
         f.close()
     except:
         debug_log(debug_log_file_path,f'Error when opening file {og_file_path}')
@@ -87,6 +89,7 @@ def read_files():
 
 def main():
     load_parameters()
+    change_log(change_log_file_path,'Nome do Arquivo', 'Número da Linha', 'Linha Original', 'Linha Alterada')
     read_files()
 
     #Tests:
