@@ -1,6 +1,8 @@
 from dotenv import load_dotenv #pip install python-dotenv
 import os
 
+from create_logs import *
+
 og_folder_path = ""
 copy_folder_path = ""
 file_extensions = []
@@ -13,13 +15,16 @@ def load_parameters():
     global copy_folder_path
     global file_extensions
     global file_enconding
+    global debug_log_file_path
+    global change_log_file_path
 
     og_folder_path = os.getenv('og_folder_path')
     copy_folder_path = os.getenv('copy_folder_path')
     file_extensions = os.getenv('file_extensions')
     file_enconding = os.getenv('file_enconding')
+    debug_log_file_path = os.getenv('debug_log_file_path')
+    change_log_file_path = os.getenv('change_log_file_path')
 
-    print(f'file_extensions: {file_extensions}')
     return
 
 def check_hifen(og_line):
@@ -36,25 +41,27 @@ def write_line(copy_file_path, og_line):
 
     f = open(copy_file_path, "a", encoding = file_enconding)
     new_line = check_hifen(og_line)
-    # new_line = og_line
     f.write(new_line)
     f.close()
+
+    if not new_line == og_line:
+        change_log(change_log_file_path,copy_file_path,1,og_line,new_line)
 
 def create_one_file(copy_file_path):
     try:
         if os.path.isfile(copy_file_path):
-            print(f'Overwriting {copy_file_path} file...')
+            debug_log(debug_log_file_path,f'Overwriting {copy_file_path} file...')
         else:
-            print(f'Creating {copy_file_path} file...')
+            debug_log(debug_log_file_path,f'Creating {copy_file_path} file...')
 
         f = open(copy_file_path, "w", encoding = file_enconding)
         f.close()
     except:
-        print(f'Error when creating file {copy_file_path}')
+        debug_log(debug_log_file_path,f'Error when creating file {copy_file_path}')
 
 def read_one_file(og_folder_path, file_name):
     og_file_path = og_folder_path + "\\" + file_name
-    print(f'Opening file {og_file_path}...')
+    debug_log(debug_log_file_path,f'Opening file {og_file_path}...' )
     try:
         f = open(og_file_path, 'r', encoding = file_enconding)
         copy_file_path = f'{copy_folder_path}\\{file_name}'
@@ -63,7 +70,7 @@ def read_one_file(og_folder_path, file_name):
             write_line(copy_file_path, linha)
         f.close()
     except:
-        print(f'Error when opening file {og_file_path}')
+        debug_log(debug_log_file_path,f'Error when opening file {og_file_path}')
 
 def is_valid_extension(file_name):
     for extension in file_extensions:
@@ -86,5 +93,6 @@ def main():
     # copy_one_file(f'{copy_folder_path}\\idk.txt')
     # print(check_hifen('[name]Rintaro[line]"C-Claro."[%p]')) 
     # load_parameters()
+    # debug_log(debug_log_file_path, 'YAY')
 
 main()

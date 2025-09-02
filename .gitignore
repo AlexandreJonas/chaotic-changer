@@ -1,3 +1,6 @@
 .env
+debug_log.txt
+change_log.csv
 /CopiedFile
 /OriginalFile
+/__pycache__
