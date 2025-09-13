@@ -1,6 +1,7 @@
 .env
 debug_log.txt
 change_log.csv
+character_names.txt
 /CopiedFile
 /OriginalFile
 /__pycache__

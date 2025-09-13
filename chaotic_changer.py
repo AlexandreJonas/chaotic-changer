@@ -3,6 +3,7 @@ import os
 
 from create_logs import *
 import parameters
+import change_name
 
 def check_hifen(og_line):
     if '-' in og_line:
@@ -66,11 +67,13 @@ def read_files():
 
 def main():
     parameters.load_parameters()
+    change_name.load_names()
     change_log('Nome do Arquivo', 'Número da Linha', 'Linha Original', 'Linha Alterada')
     read_files()
 
     #Tests:
     # print(check_hifen('[name]Rintaro[line]"C-Claro."[%p]')) 
     # debug_log('YAY')
+    # change_name.load_names()
 
 main()

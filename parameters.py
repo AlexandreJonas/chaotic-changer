@@ -10,6 +10,7 @@ def load_parameters():
     global file_enconding
     global debug_log_file_path
     global change_log_file_path
+    global character_names_file_path
 
     og_folder_path = os.getenv('og_folder_path')
     copy_folder_path = os.getenv('copy_folder_path')
@@ -17,5 +18,6 @@ def load_parameters():
     file_enconding = os.getenv('file_enconding')
     debug_log_file_path = os.getenv('debug_log_file_path')
     change_log_file_path = os.getenv('change_log_file_path')
+    character_names_file_path = os.getenv('character_names_file_path')
 
     return
