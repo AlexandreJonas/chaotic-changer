@@ -5,13 +5,25 @@ from create_logs import *
 import parameters
 import change_name
 
+def is_lower_word(og_line, hifen_index):
+    #TODO: FLag para essa função de is_lower
+    after_hifen_str = og_line[hifen_index + 1:]
+    for name in change_name.all_names_list:
+        if name in after_hifen_str:
+            name_index = after_hifen_str.index(name)
+            if name_index < 1:
+                return False
+    return True
+
 def check_hifen(og_line):
+    #TODO: Refatorar lógica
     if '-' in og_line:
         hifen_index = og_line.index('-')
+        if not is_lower_word(og_line, hifen_index):
+            return og_line
         if og_line[hifen_index - 1] == og_line[hifen_index + 1]:
             idk_list = list(og_line)
             idk_list[hifen_index + 1] = idk_list[hifen_index + 1].lower()
-            #TODO: Caso que não devia deixar no minusculo: 5300:[name]Takumi[line]“M-Misumi-kun... ?”[%p]
             return ''.join(idk_list)
     return og_line
 
@@ -74,6 +86,7 @@ def main():
     #Tests:
     # print(check_hifen('[name]Rintaro[line]"C-Claro."[%p]')) 
     # debug_log('YAY')
-    # change_name.load_names()
+    # print( is_lower_word('5300:[name]Takumi[line]“M-Misumi-kun... ?”[%p]',25)  )
+    # print( is_lower_word('5300:[name]Takumi[line]“B-Batata-kun  Misumi... ?”[%p]',25)  )
 
 main()
