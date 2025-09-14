@@ -3,7 +3,6 @@ import os
 
 from create_logs import *
 import parameters
-import change_name
 
 #TODO: Renomear função para ficar mais descritivo
 #Função para verificar se a palavra a ser alterada não está na lista de nomes
@@ -12,7 +11,7 @@ def is_lower_word(og_line, hifen_index):
     if not parameters.is_hifen_excecao:
         return True
     after_hifen_str = og_line[hifen_index + 1:]
-    for name in change_name.all_names_list:
+    for name in parameters.all_names_list:
         if name in after_hifen_str:
             name_index = after_hifen_str.index(name)
             if name_index < 1:
@@ -83,7 +82,7 @@ def read_files():
 
 def main():
     parameters.load_parameters()
-    change_name.load_names()
+    parameters.load_names()
     change_log('Nome do Arquivo', 'Número da Linha', 'Linha Original', 'Linha Alterada')
     read_files()
 
