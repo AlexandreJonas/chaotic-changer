@@ -1,11 +1,12 @@
 import parameters
 
 def debug_log(debug_message):
-    debug_log_file_path = parameters.debug_log_file_path
-    f = open(debug_log_file_path, "a", encoding = 'utf-8')
-    f.write(debug_message)
-    f.write('\n')
-    f.close()
+    if parameters.is_debug_log_txt:
+        debug_log_file_path = parameters.debug_log_file_path
+        f = open(debug_log_file_path, "a", encoding = 'utf-8')
+        f.write(debug_message)
+        f.write('\n')
+        f.close()
     print(debug_message)
     return
 

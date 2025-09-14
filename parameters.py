@@ -16,6 +16,7 @@ def load_parameters():
     global is_hifen
     global is_hifen_excecao
     global is_change_name
+    global is_debug_log_txt
 
     og_folder_path = os.getenv('og_folder_path')
     copy_folder_path = os.getenv('copy_folder_path')
@@ -28,6 +29,7 @@ def load_parameters():
     is_hifen = ( os.getenv('is_hifen') == '1')
     is_hifen_excecao = ( os.getenv('is_hifen_excecao') == '1')
     is_change_name = ( os.getenv('is_change_name') == '1')
+    is_debug_log_txt = ( os.getenv('is_debug_log_txt') == '1')
 
     return
 
