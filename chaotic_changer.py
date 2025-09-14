@@ -5,8 +5,12 @@ from create_logs import *
 import parameters
 import change_name
 
+#TODO: Renomear função para ficar mais descritivo
+#Função para verificar se a palavra a ser alterada não está na lista de nomes
 def is_lower_word(og_line, hifen_index):
-    #TODO: FLag para essa função de is_lower
+  
+    if not parameters.is_hifen_excecao:
+        return True
     after_hifen_str = og_line[hifen_index + 1:]
     for name in change_name.all_names_list:
         if name in after_hifen_str:
@@ -17,7 +21,7 @@ def is_lower_word(og_line, hifen_index):
 
 def check_hifen(og_line):
     #TODO: Refatorar lógica
-    if '-' in og_line:
+    if parameters.is_hifen and  ('-' in og_line) :
         hifen_index = og_line.index('-')
         if not is_lower_word(og_line, hifen_index):
             return og_line
