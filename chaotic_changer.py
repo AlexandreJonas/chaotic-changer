@@ -3,6 +3,7 @@ import os
 
 from create_logs import *
 import parameters
+import change_name
 
 #TODO: Renomear função para ficar mais descritivo
 #Função para verificar se a palavra a ser alterada não está na lista de nomes
@@ -34,6 +35,7 @@ def write_line(copy_file_path, og_line, line_number):
 
     f = open(copy_file_path, "a", encoding = parameters.file_enconding)
     new_line = check_hifen(og_line)
+    new_line = change_name.check_change_name(new_line)
     f.write(new_line)
     f.close()
 
@@ -91,5 +93,6 @@ def main():
     # debug_log('YAY')
     # print( is_lower_word('5300:[name]Takumi[line]“M-Misumi-kun... ?”[%p]',25)  )
     # print( is_lower_word('5300:[name]Takumi[line]“B-Batata-kun  Misumi... ?”[%p]',25)  )
+    # print( change_name.check_change_name("something something rintAro okabe") )
 
 main()

@@ -6,6 +6,7 @@ def debug_log(debug_message):
     f.write(debug_message)
     f.write('\n')
     f.close()
+    print(debug_message)
     return
 
 
