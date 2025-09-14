@@ -5,3 +5,7 @@ character_names.txt
 /CopiedFile
 /OriginalFile
 /__pycache__
+/build
+/dist
+chaotic_changer.spec
+chaotic_changer.exe
